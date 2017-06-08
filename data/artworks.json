@@ -1,0 +1,43 @@
+[
+  {
+    "id": "71677",
+    "updatedAt": "2017-06-08T05:55:28.571Z",
+    "isValid": true,
+    "artworkType": "71678",
+    "description": null,
+    "slug": "tumbler",
+    "images": [
+      {
+        "alt": null,
+        "path": "/2409/1496883869-c868t.jpg",
+        "size": 395063,
+        "title": null,
+        "width": 4272,
+        "format": "jpg",
+        "height": 2848
+      },
+      {
+        "alt": null,
+        "path": "/2409/1496883868-c868r.jpg",
+        "size": 577891,
+        "title": null,
+        "width": 4272,
+        "format": "jpg",
+        "height": 2848
+      },
+      {
+        "alt": null,
+        "path": "/2409/1496883868-c868f1.jpg",
+        "size": 536813,
+        "title": null,
+        "width": 4272,
+        "format": "jpg",
+        "height": 2848
+      }
+    ],
+    "title": "Tumbler",
+    "position": 1,
+    "itemType": "10890",
+    "lastEditor": "1938"
+  }
+]
