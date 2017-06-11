@@ -3,3 +3,6 @@ npm-debug.log
 .cache
 .env
 .DS_Store
+.next
+data/*.json
+out

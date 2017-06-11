@@ -2,18 +2,24 @@
   "name": "kaushik.vision",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start server.js",
+    "export": "next export"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^1.1.4",
     "datocms-client": "^0.3.24",
     "dotenv": "^4.0.0",
-    "next": "latest",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "styled-components": "^2.0.0-17"
+    "next": "beta",
+    "polished": "^1.1.3",
+    "react": "^15.5.4",
+    "react-css-transition-replace": "^2.2.1",
+    "react-dom": "^15.5.4",
+    "react-imgix": "^6.0.0",
+    "styled-components": "^2.0.1",
+    "styled-components-grid": "^1.0.0-preview.10",
+    "styled-components-spacing": "^2.1.3"
   },
   "author": "",
   "license": "ISC"
