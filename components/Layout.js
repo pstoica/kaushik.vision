@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styled, { css, ThemeProvider } from "styled-components";
 import { Flex, Box } from "grid-styled/dist/index.js";
+import { modularScale } from "polished";
 
 import Header from "./Header";
 
@@ -14,6 +15,7 @@ const breakpoints = {
 };
 
 const theme = {
+  modularScale,
   scale,
   breakpoints,
   space: x => `${scale * x}px`,

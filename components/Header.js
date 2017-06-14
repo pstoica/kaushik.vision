@@ -1,8 +1,6 @@
 import Link from "next/link";
 
 import styled from "styled-components";
-import { p, px, py } from "styled-components-spacing";
-import { modularScale } from "polished";
 
 const Header = styled.header`
   background-color: ${props => props.theme.colors.blue};
@@ -24,13 +22,13 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-  max-width: ${props => props.theme.maxWidth};
+  max-width: ${p => p.theme.maxWidth};
   margin: 0 auto;
-  ${px(3)};
+  padding: 0 ${p => p.theme.space(3)};
 `;
 
 const SiteTitle = styled.h1`
-  font-size: ${modularScale(2)};
+  font-size: ${p => p.theme.modularScale(2)};
   font-weight: 500;
   flex: auto 1;
   display: flex;
@@ -54,7 +52,7 @@ const Nav = styled.div`
       font-weight: 300;
 
       a {
-        ${py(1)};
+        padding: ${p => p.theme.space(3)} 0;
       }
     }
   }

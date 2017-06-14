@@ -91,12 +91,14 @@ const Title = styled.h1`
 const AddButton = styled.button`
   display: block;
   margin-top: ${p => p.theme.space(4)};
-  padding: ${p => p.theme.space(1)};
+  padding: ${p => `${p.theme.space(1)} ${p.theme.space(2)}`};
   border: 0;
   background-color: ${p => p.theme.colors.blue};
   color: ${p => p.theme.colors.white};
   text-transform: lowercase;
   font-family: Hind;
+  font-size: ${p => p.theme.modularScale(1)};
+  font-weight: bold;
 `;
 
 export default class extends React.Component {
