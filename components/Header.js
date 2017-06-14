@@ -12,7 +12,7 @@ const Header = styled.header`
   a {
     color: ${props => props.theme.colors.white};
     box-shadow: 0 0 transparent;
-    transition: box-shadow 0.2s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: box-shadow 0.2s ${props => props.theme.easings.cubicInOut};
   }
 
   a:hover {
