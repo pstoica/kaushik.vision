@@ -22,21 +22,22 @@ const Container = styled.div`
   height: 100%;
   max-width: ${p => p.theme.maxWidth};
   margin: 0 auto;
-  padding: ${p => `${p.theme.space(8)} ${p.theme.space(3)}`};
+  padding: ${p => `${p.theme.space(8)} ${p.theme.space(1)}`};
   text-align: center;
   font-family: ${p => p.theme.fonts.primary};
 `;
 
 const SiteTitle = styled.h1`
   font-weight: bold;
-  font-size: ${p => p.theme.modularScale(3)};
+  font-size: ${p => p.theme.modularScale(2)};
+  ${p => p.theme.media.sm`font-size: ${p.theme.modularScale(3)};`}
   ${p => p.theme.media.md`font-size: ${p.theme.modularScale(4)};`}
 
   margin-bottom: ${p => p.theme.space(2)};
 `;
 
 const Nav = styled.div`
-  font-size: ${p => p.theme.modularScale(0)};
+  font-size: ${p => p.theme.modularScale(-0.5)};
   ${p => p.theme.media.md`font-size: ${p.theme.modularScale(1)};`}
   font-weight: normal;
 
@@ -47,7 +48,8 @@ const Nav = styled.div`
 
     li {
       display: inline-block;
-      margin-right: ${p => p.theme.space(3)};
+      margin-right: ${p => p.theme.space(1)};
+      ${p => p.theme.media.sm`margin-right: ${p.theme.space(3)};`}
 
       &:last-child {
         margin-right: 0;
