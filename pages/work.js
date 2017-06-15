@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ReactCSSTransitionReplace from "react-css-transition-replace";
 import { modularScale } from "polished";
 
 import Layout from "../components/Layout";
@@ -30,39 +29,38 @@ const Media = styled.div`
   }
 `;
 
-const PrimaryImage = styled(({ image, ...props }) => (
+const FadingImage = styled(({ active, className, ...props }) => (
+  <div className={className}><Image {...props} /></div>
+))`
+  position: relative;
+  margin-right: -100%;
+  width: 100%;
+  float: left;
+  transition: opacity 0.3s ${props => props.theme.easings.cubicIn};
+  opacity: ${p => p.active ? 1 : 0};
+`;
+
+const PrimaryImage = styled(({ images, active, ...props }) => (
   <div {...props}>
-    <ReactCSSTransitionReplace
-      transitionName="cross-fade"
-      transitionEnterTimeout={300}
-      transitionLeaveTimeout={300}
-    >
-      <Image
+    {images.map((image, i) => (
+      <FadingImage
         src={image.path}
         key={image.path}
+        active={i === active}
         width={850}
         height={550}
         crop="center"
       />
-    </ReactCSSTransitionReplace>
+    ))}
   </div>
 ))`
+  position: relative;
   margin-bottom: ${p => p.theme.space(1)};
 
-  .cross-fade-leave {
-    opacity: 1;
-  }
-  .cross-fade-leave.cross-fade-leave-active {
-    opacity: 0;
-    transition: opacity 0.3s ${props => props.theme.easings.cubicIn};
-  }
-
-  .cross-fade-enter {
-    opacity: 0;
-  }
-  .cross-fade-enter.cross-fade-enter-active {
-    opacity: 1;
-    transition: opacity 0.3s ${props => props.theme.easings.cubicIn};
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
   }
 `;
 
@@ -75,7 +73,11 @@ const Thumbnail = styled.div`
   margin-right: ${p => p.theme.space(1)};
   cursor: pointer;
   opacity: ${props => props.active ? 1 : 0.5};
-  transition: 0.15s ${props => props.theme.easings.cubicInOut} opacity;
+  transition: 0.3s ${props => props.theme.easings.cubicInOut} opacity;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const Details = styled.div`
@@ -150,7 +152,7 @@ export default class extends React.Component {
       <Layout title={artwork.title}>
         <Wrapper>
           <Media>
-            <PrimaryImage image={artwork.images[selectedImage]} />
+            <PrimaryImage images={artwork.images} active={selectedImage} />
 
             <Thumbnails>
               {artwork.images.map((x, i) => (
