@@ -8,8 +8,6 @@ const Container = styled.div`
   max-width: ${p => p.theme.maxWidth};
   margin: 0 auto;
   padding: ${p => p.theme.space(2)};
-
-  ${p => p.theme.media.lg`padding: ${p => p.theme.space(6)} ${p => p.theme.space(2)}`}
 `;
 
 export default ({ children, title, ...props }) => (

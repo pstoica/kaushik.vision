@@ -7,9 +7,6 @@ import Image from "../components/Image";
 import artworks from "../data/artworks";
 
 const Wrapper = styled.div`
-  display: flex;
-  margin: 0 ${p => p.theme.space(-1)};
-
   img {
     display: block;
     max-width: 100%;
@@ -17,27 +14,19 @@ const Wrapper = styled.div`
   }
 `;
 
-const Media = styled.div`
-  ${p => p.theme.width(8 / 12)};
-  padding-left: ${p => p.theme.space(1)};
-
-  ${p => p.theme.media.md`padding-right: ${p => p.theme.space(1)}`}
-  ${p => p.theme.media.lg`padding-right: ${p => p.theme.space(5)}`}
-
-  img {
-    display: block;
-  }
-`;
-
 const FadingImage = styled(({ active, className, ...props }) => (
   <div className={className}><Image {...props} /></div>
 ))`
   position: relative;
-  margin-right: -100%;
   width: 100%;
+  margin-right: -100%;
   float: left;
   transition: opacity 0.3s ${props => props.theme.easings.cubicIn};
   opacity: ${p => p.active ? 1 : 0};
+
+  img {
+    margin: 0 auto;
+  }
 `;
 
 const PrimaryImage = styled(({ images, active, ...props }) => (
@@ -54,8 +43,10 @@ const PrimaryImage = styled(({ images, active, ...props }) => (
     ))}
   </div>
 ))`
+  ${p => p.theme.media.lg`${p => p.theme.width(10 / 12)}`}
+
   position: relative;
-  margin-bottom: ${p => p.theme.space(1)};
+  margin: 0 auto;
 
   &:after {
     content: "";
@@ -67,6 +58,8 @@ const PrimaryImage = styled(({ images, active, ...props }) => (
 const Thumbnails = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  margin: ${p => p.theme.space(1)} auto 0;
 `;
 
 const Thumbnail = styled.div`
@@ -81,8 +74,8 @@ const Thumbnail = styled.div`
 `;
 
 const Details = styled.div`
-  flex: 1 1 auto;
-  padding: 0 ${p => p.theme.space(1)};
+  text-align: center;
+  margin: ${p => `${p.theme.space(2)} 0 ${p.theme.space(4)}`};
 `;
 
 const Title = styled.h1`
@@ -117,15 +110,6 @@ const AddButton = styled.a`
   font-weight: bold;
 `;
 
-const GumroadButton = props => (
-  <a
-    className="gumroad-button"
-    href="https://gum.co/demo"
-    target="_blank"
-    {...props}
-  />
-);
-
 export default class extends React.Component {
   constructor(props) {
     super(props);
@@ -151,25 +135,23 @@ export default class extends React.Component {
     return (
       <Layout title={artwork.title}>
         <Wrapper>
-          <Media>
-            <PrimaryImage images={artwork.images} active={selectedImage} />
-
-            <Thumbnails>
-              {artwork.images.map((x, i) => (
-                <Thumbnail
-                  onClick={() => this.selectImage(i)}
-                  active={selectedImage === i}
-                >
-                  <Image src={x.path} width={100} height={100} crop="entropy" />
-                </Thumbnail>
-              ))}
-            </Thumbnails>
-          </Media>
-
           <Details>
             <Title>{artwork.title}</Title>
             <Description>{artwork.description}</Description>
           </Details>
+
+          <PrimaryImage images={artwork.images} active={selectedImage} />
+
+          <Thumbnails>
+            {artwork.images.map((x, i) => (
+              <Thumbnail
+                onClick={() => this.selectImage(i)}
+                active={selectedImage === i}
+              >
+                <Image src={x.path} width={100} height={100} crop="entropy" />
+              </Thumbnail>
+            ))}
+          </Thumbnails>
         </Wrapper>
       </Layout>
     );
