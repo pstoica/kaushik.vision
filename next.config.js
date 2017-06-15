@@ -4,7 +4,6 @@ const artworks = require("./data/artworks");
 module.exports = {
   exportPathMap: function() {
     const workPaths = {};
-    console.log(artworks);
     artworks.forEach(work => {
       workPaths[`/work/${work.slug}`] = {
         page: "/work",

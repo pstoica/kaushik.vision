@@ -1,13 +1,12 @@
 [
   {
     "id": "71677",
-    "updatedAt": "2017-06-14T23:14:07.103Z",
+    "updatedAt": "2017-06-15T05:55:08.347Z",
     "isValid": true,
-    "gumroadId": null,
+    "description": "3x3x5 inches",
     "price": null,
     "slug": "tumbler",
     "artworkType": "71678",
-    "description": "3x3x5 inches",
     "images": [
       {
         "alt": null,
@@ -46,11 +45,10 @@
     "id": "72391",
     "updatedAt": "2017-06-08T23:55:05.838Z",
     "isValid": true,
-    "gumroadId": null,
+    "description": null,
     "price": null,
     "slug": "mug",
     "artworkType": "71678",
-    "description": null,
     "images": [
       {
         "alt": null,

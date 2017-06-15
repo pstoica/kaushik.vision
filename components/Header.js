@@ -28,13 +28,16 @@ const Container = styled.div`
 `;
 
 const SiteTitle = styled.h1`
-  font-size: ${p => p.theme.modularScale(4)};
   font-weight: bold;
+  font-size: ${p => p.theme.modularScale(3)};
+  ${p => p.theme.media.md`font-size: ${p.theme.modularScale(4)};`}
+
   margin-bottom: ${p => p.theme.space(2)};
 `;
 
 const Nav = styled.div`
-  font-size: ${p => p.theme.modularScale(1)};
+  font-size: ${p => p.theme.modularScale(0)};
+  ${p => p.theme.media.md`font-size: ${p.theme.modularScale(1)};`}
   font-weight: normal;
 
   ul {
