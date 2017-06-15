@@ -46,6 +46,7 @@ const Artwork = styled(({ title, images, slug, path, ...props }) => (
     </Link>
   </div>
 ))`
+  line-height: 0;
   width: 50%;
   ${p => `padding: 0 ${p.theme.space(1)} ${p.theme.space(2)};`}
 

@@ -18,8 +18,6 @@ module.exports = {
       },
       workPaths,
     );
-
-    lol;
   },
   pagesDirectory: "/pages",
 };
