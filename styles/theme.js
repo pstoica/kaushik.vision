@@ -37,7 +37,7 @@ export default {
     blue: "#0033cc",
   },
   fonts: {
-    primary: "'Noto Sans', sans-serif",
+    primary: "'Hind', sans-serif",
     secondary: "'Open Sans', sans-serif",
   },
   easings: {

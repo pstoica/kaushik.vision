@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled, { css } from "styled-components";
+import { opacify } from "polished";
 
 import Layout from "../components/Layout";
 import Image from "../components/Image";
@@ -23,16 +24,16 @@ const Title = styled.h3`
   width: 100%;
   height: 100%;
 
-  background-color: ${p => p.theme.colors.blue};
-  color: ${p => p.theme.colors.white};
-
   text-transform: lowercase;
   font-size: ${p => p.theme.modularScale(1)};
+
+  background-color: ${p => opacify(-0.3, p.theme.colors.blue)};
+  color: ${p => p.theme.colors.white};
 
   transition: 0.3s ${props => props.theme.easings.cubicIn} opacity;
   opacity: 0;
   &:hover {
-    opacity: 0.7;
+    opacity: 1;
   }
 `;
 
