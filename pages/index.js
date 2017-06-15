@@ -25,7 +25,8 @@ const Title = styled.h3`
   height: 100%;
 
   text-transform: lowercase;
-  font-size: ${p => p.theme.modularScale(1)};
+  font-size: ${p => p.theme.modularScale(3)};
+  font-weight: regular;
 
   background-color: ${p => opacify(-0.3, p.theme.colors.blue)};
   color: ${p => p.theme.colors.white};
