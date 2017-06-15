@@ -15,7 +15,6 @@ module.exports = {
     return Object.assign(
       {
         "/": { page: "/" },
-        "/work": { page: "/gallery" },
       },
       workPaths,
     );
