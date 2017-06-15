@@ -9,7 +9,8 @@ const Header = styled.header`
   a {
     color: ${props => props.theme.colors.white};
     box-shadow: 0 0 transparent;
-    transition: box-shadow 0.2s ${props => props.theme.easings.cubicInOut};
+    transition: box-shadow 0.15s ${props => props.theme.easings.cubicIn};
+    padding-bottom: 2px;
   }
 
   a:hover {
@@ -33,7 +34,7 @@ const SiteTitle = styled.h1`
 `;
 
 const Nav = styled.div`
-  font-size: ${p => p.theme.modularScale(0.25)};
+  font-size: ${p => p.theme.modularScale(1)};
   font-weight: normal;
 
   ul {

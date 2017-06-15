@@ -78,9 +78,10 @@ const Details = styled.div`
   margin: ${p => `${p.theme.space(2)} 0 ${p.theme.space(4)}`};
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
   text-transform: lowercase;
   font-size: ${p => p.theme.modularScale(4)};
+  font-weight: bold;
   margin-bottom: ${p => p.theme.space(1)};
 `;
 
