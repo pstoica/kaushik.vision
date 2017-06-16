@@ -6,7 +6,8 @@
     "build": "next build && next export",
     "start": "next start server.js",
     "export": "next export",
-    "deploy": "surge ./out kaushik.vision"
+    "deploy": "surge ./out kaushik.vision",
+    "test": "true"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^1.1.4",
