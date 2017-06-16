@@ -16,6 +16,8 @@ app.prepare().then(() => {
 
     if (pathname === "/") {
       app.render(req, res, "/", {});
+    } else if (pathname === "/sounds") {
+      app.render(req, res, "/sounds", {});
     } else if (workParams) {
       app.render(req, res, "/work", workParams);
     } else if (categoryParams) {

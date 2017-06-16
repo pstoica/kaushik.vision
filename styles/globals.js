@@ -7,6 +7,7 @@ injectGlobal`
 
   @import url('https://fonts.googleapis.com/css?family=Noto+Sans:300,400,600|Open+Sans:300,400,600,700');
 
+
   * {
     box-sizing: border-box;
   }

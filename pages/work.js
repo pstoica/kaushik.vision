@@ -1,7 +1,5 @@
 import React from "react";
-import { findDOMNode } from "react-dom";
 import styled from "styled-components";
-import { modularScale } from "polished";
 
 import Carousel from "nuka-carousel";
 import CarouselDecorators from "../components/CarouselDecorators";
