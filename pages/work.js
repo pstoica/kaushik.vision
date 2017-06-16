@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import Carousel from "nuka-carousel";
-import CarouselDecorators from "../components/CarouselDecorators";
+import Carousel from "react-slick";
 import Layout from "../components/Layout";
 import Image from "../components/Image";
 import artworks from "../data/artworks";
+
+import "../styles/slick";
 
 const Wrapper = styled.div`
   img {
@@ -19,7 +20,7 @@ const Thumbnails = styled.div`
   display: none;
   flex-wrap: wrap;
   justify-content: center;
-  margin: ${p => p.theme.space(1)} auto 0;
+  margin: ${p => `${p.theme.space(4)} 0 ${p.theme.space(1)}`};
 
   ${p => p.theme.media.md`display: flex;`}
 `;
@@ -28,7 +29,6 @@ const Thumbnail = styled.div`
   margin-right: ${p => p.theme.space(1)};
   cursor: pointer;
   opacity: ${props => (props.active ? 1 : 0.5)};
-  transition: 0.3s ${props => props.theme.easings.cubicInOut} opacity;
 
   &:hover {
     opacity: 1;
@@ -74,20 +74,21 @@ const AddButton = styled.a`
 `;
 
 export default class WorkPage extends React.Component {
+  static async getInitialProps({ query: { id } }) {
+    const artwork = artworks.find(x => x.slug === id);
+    return { artwork };
+  }
+
   constructor(props) {
     super(props);
-    const { url: { query: { id } } } = props;
-    const artwork = artworks.find(x => x.slug === id);
-
     this.state = {
-      artwork,
+      currentSlide: 0,
     };
-
-    this.setCarouselData = Carousel.ControllerMixin.setCarouselData;
   }
 
   render() {
-    const { artwork, carousel = { state: { currentSlide: 0 } } } = this.state;
+    const { artwork } = this.props;
+    const { currentSlide } = this.state;
 
     return (
       <Layout
@@ -97,29 +98,29 @@ export default class WorkPage extends React.Component {
       >
         <Wrapper>
           <Carousel
+            dots={true}
+            infinite={true}
+            speed={500}
+            slidesToShow={1}
+            slidesToScroll={1}
+            beforeChange={i => this.setState({ currentSlide: i })}
             ref={c => (this.carousel = c)}
-            decorators={CarouselDecorators}
-            data={() => this.setState({ carousel: this.carousel })}
           >
             {artwork.images.map((image, i) =>
-              <Image
-                src={image.path}
-                key={image.path}
-                width={850}
-                height={550}
-                crop="center"
-                imgProps={{
-                  onLoad: () => {
-                    if (i === 0) {
-                      this.carousel.setDimensions();
-                    }
-                  },
-                  style: {
-                    width: "100%",
-                    height: "auto",
-                  },
-                }}
-              />
+              <div key={image.path}>
+                <Image
+                  src={image.path}
+                  height={550}
+                  fit="fill"
+                  color="#fff"
+                  faces={false}
+                  imgProps={{
+                    style: {
+                      width: "100%",
+                    },
+                  }}
+                />
+              </div>
             )}
           </Carousel>
 
@@ -127,8 +128,8 @@ export default class WorkPage extends React.Component {
             {artwork.images.map((x, i) =>
               <Thumbnail
                 key={i}
-                onClick={() => this.carousel.goToSlide(i)}
-                active={carousel && carousel.state.currentSlide === i}
+                onClick={() => this.carousel.slickGoTo(i)}
+                active={currentSlide === i}
               >
                 <Image src={x.path} width={100} height={100} crop="entropy" />
               </Thumbnail>
