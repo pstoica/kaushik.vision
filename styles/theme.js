@@ -41,5 +41,5 @@ export default {
     cubicIn: "cubic-bezier(0.42, 0.0, 1.0, 1.0)",
     cubicInOut: "cubic-bezier(0.645, 0.045, 0.355, 1.000)",
   },
-  maxWidth: "60em",
+  maxWidth: "80em",
 };
