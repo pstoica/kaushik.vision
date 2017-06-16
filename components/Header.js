@@ -76,7 +76,7 @@ const ListLink = ({ href, as, children }) => (
 );
 
 const Category = ({ name, children }) => (
-  <ListLink href={`/work?category=${name}`} as={`/category/${name}`}>
+  <ListLink href={`/index?category=${name}`} as={`/category/${name}`}>
     {children}
   </ListLink>
 );
