@@ -15,7 +15,7 @@ module.exports = {
       {
         "/": { page: "/" },
       },
-      workPaths,
+      workPaths
     );
   },
   pagesDirectory: "/pages",

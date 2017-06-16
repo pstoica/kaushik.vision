@@ -7,4 +7,4 @@ deployment:
     commands:
     - node scrape
     - npm run build
-    - surge --project ./out
+    - npm run deploy

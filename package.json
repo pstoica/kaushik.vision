@@ -5,10 +5,12 @@
     "dev": "node server.js",
     "build": "next build && next export",
     "start": "next start server.js",
-    "export": "next export"
+    "export": "next export",
+    "deploy": "surge ./out kaushik.vision"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^1.1.4",
+    "babel-types": "^6.25.0",
     "datocms-client": "^0.3.24",
     "dotenv": "^4.0.0",
     "grid-styled": "^2.0.0-0",
