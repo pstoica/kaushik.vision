@@ -103,8 +103,6 @@ export default class WorkPage extends React.Component {
             ref={c => this.carousel = c}
             decorators={CarouselDecorators}
             data={() => this.setState({ carousel: this.carousel })}
-            easing="easeInOutQuad"
-            speed={300}
           >
             {artwork.images.map((image, i) => (
               <Image
@@ -118,9 +116,6 @@ export default class WorkPage extends React.Component {
                     if (i === 0) {
                       this.carousel.setDimensions();
                     }
-                  },
-                  style: {
-                    minHeight: 100,
                   },
                 }}
               />
