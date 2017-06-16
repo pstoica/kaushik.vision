@@ -1,5 +1,5 @@
 // next.config.js
-const artworkTypes = require("./data/artworks");
+const artworks = require("./data/artworks");
 const artworkTypes = require("./data/artwork-types");
 
 module.exports = {
