@@ -14,16 +14,12 @@ app.prepare().then(() => {
     const workParams = route("/work/:id")(pathname);
     const categoryParams = route("/category/:category")(pathname);
 
-    if (pathname === "/") {
-      app.render(req, res, "/", {});
-    } else if (pathname === "/sounds") {
-      app.render(req, res, "/sounds", {});
-    } else if (workParams) {
+    if (workParams) {
       app.render(req, res, "/work", workParams);
     } else if (categoryParams) {
       app.render(req, res, "/", categoryParams);
     } else {
-      handle(req, res);
+      app.render(req, res, pathname, {});
     }
   }).listen(3000, err => {
     if (err) throw err;

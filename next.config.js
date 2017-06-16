@@ -1,21 +1,31 @@
 // next.config.js
-const artworks = require("./data/artworks");
+const artworkTypes = require("./data/artworks");
+const artworkTypes = require("./data/artwork-types");
 
 module.exports = {
   exportPathMap: function() {
-    const workPaths = {};
+    const extraPaths = {};
     artworks.forEach(work => {
-      workPaths[`/work/${work.slug}`] = {
+      extraPaths[`/work/${work.slug}`] = {
         page: "/work",
         query: { id: work.slug },
+      };
+    });
+
+    artworkTypes.forEach(workType => {
+      extraPaths[`/category/${workType.slug}`] = {
+        page: "/",
+        query: { category: workType.slug },
       };
     });
 
     return Object.assign(
       {
         "/": { page: "/" },
+        "/sounds": { page: "/sounds" },
+        "/contact": { page: "/contact" },
       },
-      workPaths
+      extraPaths
     );
   },
   pagesDirectory: "/pages",
