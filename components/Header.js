@@ -1,6 +1,7 @@
 import Link from "next/link";
-
 import styled from "styled-components";
+
+import categories from "../data/artwork-types.json";
 
 const Header = styled.header`
   background-color: ${props => props.theme.colors.blue};
@@ -10,7 +11,6 @@ const Header = styled.header`
     color: ${props => props.theme.colors.white};
     box-shadow: 0 0 transparent;
     transition: box-shadow 0.15s ${props => props.theme.easings.cubicIn};
-    padding-bottom: 2px;
   }
 
   a:hover {
@@ -61,25 +61,27 @@ const Nav = styled.div`
       &:last-child {
         margin-right: 0;
       }
+
+      a {
+        padding-bottom: 2px;
+      }
     }
   }
 `;
 
-const ListLink = ({ href, as, children }) => (
+const ListLink = ({ href, as, children }) =>
   <li>
     <Link href={href} as={as}>
       <a>
         {children}
       </a>
     </Link>
-  </li>
-);
+  </li>;
 
-const Category = ({ name, children }) => (
+const Category = ({ name, children }) =>
   <ListLink href={`/index?category=${name}`} as={`/category/${name}`}>
     {children}
-  </ListLink>
-);
+  </ListLink>;
 
 export default class extends React.Component {
   render() {
@@ -93,9 +95,11 @@ export default class extends React.Component {
           </SiteTitle>
           <Nav>
             <ul>
-              <Category name="ceramics">Ceramics</Category>
-              <Category name="painting">Painting</Category>
-              <Category name="photography">Photography</Category>
+              {categories.map(category =>
+                <Category key={category.slug} name={category.slug}>
+                  {category.title}
+                </Category>
+              )}
               <ListLink href="/sounds" as="/sounds">Sounds</ListLink>
               <ListLink href="/contact" as="/contact">Contact</ListLink>
             </ul>

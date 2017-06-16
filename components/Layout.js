@@ -10,16 +10,36 @@ const Container = styled.div`
   padding: ${p => p.theme.space(2)};
 `;
 
-export default ({ children, title, ...props }) => (
+const Details = styled.div`
+  text-align: center;
+  margin: ${p => `${p.theme.space(2)} 0 ${p.theme.space(4)}`};
+`;
+
+const Title = styled.h2`
+  text-transform: lowercase;
+  font-size: ${p => p.theme.modularScale(4)};
+  font-weight: bold;
+  margin-bottom: ${p => p.theme.space(1)};
+`;
+
+const Description = styled.div``;
+
+export default ({ children, pageTitle, title, subtitle, ...props }) =>
   <ThemeProvider theme={theme} {...props}>
     <div>
       <Head>
-        <title>{title ? `${title} | ` : ""}Vision Kaushik</title>
+        <title>
+          {title || pageTitle ? `${title || pageTitle} | ` : ""}Vision Kaushik
+        </title>
       </Head>
       <Header />
       <Container>
+        {title &&
+          <Details>
+            <Title>{title}</Title>
+            <Description>{subtitle}</Description>
+          </Details>}
         {children}
       </Container>
     </div>
-  </ThemeProvider>
-);
+  </ThemeProvider>;

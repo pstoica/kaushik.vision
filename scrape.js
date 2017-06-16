@@ -14,7 +14,17 @@ const SiteClient = require("datocms-client").SiteClient;
 
 const client = new SiteClient(DATO_TOKEN);
 
-client.items.all({ "filter[type]": "artwork" }).then(function(artworks) {
-  fs.writeFileSync("./data/artworks.json", JSON.stringify(artworks, "", 2));
-  console.log(`Imported ${artworks.length} artworks.`);
+client.items.all({ "filter[type]": "artwork_type" }).then(function(x) {
+  fs.writeFileSync("./data/artwork-types.json", JSON.stringify(x, "", 2));
+  console.log(`Imported ${x.length} artwork types.`);
+});
+
+client.items.all({ "filter[type]": "artwork" }).then(function(x) {
+  fs.writeFileSync("./data/artworks.json", JSON.stringify(x, "", 2));
+  console.log(`Imported ${x.length} artworks.`);
+});
+
+client.items.all({ "filter[type]": "sound" }).then(function(x) {
+  fs.writeFileSync("./data/sound.json", JSON.stringify(x, "", 2));
+  console.log(`Imported ${x.length} sounds.`);
 });

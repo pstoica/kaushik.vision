@@ -29,7 +29,7 @@ const Thumbnails = styled.div`
 const Thumbnail = styled.div`
   margin-right: ${p => p.theme.space(1)};
   cursor: pointer;
-  opacity: ${props => props.active ? 1 : 0.5};
+  opacity: ${props => (props.active ? 1 : 0.5)};
   transition: 0.3s ${props => props.theme.easings.cubicInOut} opacity;
 
   &:hover {
@@ -92,19 +92,18 @@ export default class WorkPage extends React.Component {
     const { artwork, carousel = { state: { currentSlide: 0 } } } = this.state;
 
     return (
-      <Layout title={artwork.title}>
+      <Layout
+        title={artwork.title}
+        subtitle={artwork.description}
+        pageTitle={artwork.title}
+      >
         <Wrapper>
-          <Details>
-            <Title>{artwork.title}</Title>
-            <Description>{artwork.description}</Description>
-          </Details>
-
           <Carousel
-            ref={c => this.carousel = c}
+            ref={c => (this.carousel = c)}
             decorators={CarouselDecorators}
             data={() => this.setState({ carousel: this.carousel })}
           >
-            {artwork.images.map((image, i) => (
+            {artwork.images.map((image, i) =>
               <Image
                 src={image.path}
                 key={image.path}
@@ -117,13 +116,17 @@ export default class WorkPage extends React.Component {
                       this.carousel.setDimensions();
                     }
                   },
+                  style: {
+                    width: "100%",
+                    height: "auto",
+                  },
                 }}
               />
-            ))}
+            )}
           </Carousel>
 
           <Thumbnails>
-            {artwork.images.map((x, i) => (
+            {artwork.images.map((x, i) =>
               <Thumbnail
                 key={i}
                 onClick={() => this.carousel.goToSlide(i)}
@@ -131,7 +134,7 @@ export default class WorkPage extends React.Component {
               >
                 <Image src={x.path} width={100} height={100} crop="entropy" />
               </Thumbnail>
-            ))}
+            )}
           </Thumbnails>
         </Wrapper>
       </Layout>

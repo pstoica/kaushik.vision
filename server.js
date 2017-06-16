@@ -7,17 +7,19 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const route = pathMatch();
-const match = route("/work/:id");
 
 app.prepare().then(() => {
   createServer((req, res) => {
     const { pathname, query } = parse(req.url, true);
-    const workParams = match(pathname);
+    const workParams = route("/work/:id")(pathname);
+    const categoryParams = route("/category/:category")(pathname);
 
     if (pathname === "/") {
       app.render(req, res, "/", {});
     } else if (workParams) {
       app.render(req, res, "/work", workParams);
+    } else if (categoryParams) {
+      app.render(req, res, "/", categoryParams);
     } else {
       handle(req, res);
     }

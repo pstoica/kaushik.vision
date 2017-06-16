@@ -6,10 +6,12 @@ import { opacify } from "polished";
 import Layout from "../components/Layout";
 import Image from "../components/Image";
 import artworks from "../data/artworks";
+import categories from "../data/artwork-types.json";
 
 const Gallery = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin: 0 ${p => p.theme.space(-1)} ${p => p.theme.space(-2)};
 `;
 
@@ -39,7 +41,7 @@ const Title = styled.h3`
   }
 `;
 
-const Artwork = styled(({ title, images, slug, path, className }) => (
+const Artwork = styled(({ title, images, slug, path, className }) =>
   <div className={className}>
     <Link prefetch href={`/work?id=${slug}`} as={`/work/${slug}`}>
       <a>
@@ -48,7 +50,7 @@ const Artwork = styled(({ title, images, slug, path, className }) => (
       </a>
     </Link>
   </div>
-))`
+)`
   line-height: 0;
   width: 50%;
   ${p => `padding: 0 ${p.theme.space(1)} ${p.theme.space(2)};`}
@@ -68,13 +70,21 @@ const Artwork = styled(({ title, images, slug, path, className }) => (
   }
 `;
 
-export default () => (
-  <Layout>
-    <Gallery>
-      {artworks.map(artwork => <Artwork {...artwork} key={artwork.slug} />)}
-      {artworks.map(artwork => <Artwork {...artwork} key={artwork.slug} />)}
-      {artworks.map(artwork => <Artwork {...artwork} key={artwork.slug} />)}
-      {artworks.map(artwork => <Artwork {...artwork} key={artwork.slug} />)}
-    </Gallery>
-  </Layout>
-);
+export default ({ url: { query } }) => {
+  const category =
+    query.category && categories.find(x => x.slug === query.category);
+
+  return (
+    <Layout title={category ? category.title : "Featured Work"}>
+      <Gallery>
+        {artworks
+          .filter(artwork => {
+            return category
+              ? artwork.artworkType === category.id
+              : artwork.featured;
+          })
+          .map(artwork => <Artwork {...artwork} key={artwork.slug} />)}
+      </Gallery>
+    </Layout>
+  );
+};
