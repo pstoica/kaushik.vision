@@ -38,8 +38,8 @@ const Title = styled.h3`
   }
 `;
 
-const Artwork = styled(({ title, images, slug, path, ...props }) => (
-  <div {...props}>
+const Artwork = styled(({ title, images, slug, path, className }) => (
+  <div className={className}>
     <Link prefetch href={`/work?id=${slug}`} as={`/work/${slug}`}>
       <a>
         <Image src={images[0].path} width={500} height={500} />
