@@ -6,7 +6,7 @@
     "build": "next build && next export",
     "start": "next start server.js",
     "export": "next export",
-    "deploy": "surge ./out kaushik.vision",
+    "deploy": "surge ./out kaushik.vision && surge ./out ruddy-writer.surge.sh",
     "test": "true"
   },
   "dependencies": {
