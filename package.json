@@ -1,0 +1,54 @@
+{
+  "name": "gatsby-starter-default",
+  "description": "Gatsby default starter",
+  "version": "1.0.0",
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "dependencies": {
+    "@rebass/grid": "^6.0.0-4",
+    "babel-plugin-styled-components": "^1.5.1",
+    "dotenv-extended": "^2.0.2",
+    "emotion": "^9.2.12",
+    "emotion-server": "^9.2.12",
+    "emotion-theming": "^9.2.9",
+    "facepaint": "^1.2.1",
+    "gatsby": "^2.0.31",
+    "gatsby-image": "^1.0.55",
+    "gatsby-plugin-emotion": "^2.0.5",
+    "gatsby-plugin-google-fonts": "^0.0.4",
+    "gatsby-plugin-react-helmet": "^3.0.0",
+    "gatsby-plugin-remove-trailing-slashes": "^2.0.3",
+    "gatsby-plugin-sharp": "^2.0.3",
+    "gatsby-plugin-styled-components": "^3.0.0-beta.3",
+    "gatsby-source-datocms": "^2.0.0",
+    "gatsby-source-filesystem": "^2.0.3",
+    "gatsby-transformer-remark": "^2.1.9",
+    "gatsby-transformer-sharp": "^2.0.3",
+    "polished": "^1.9.3",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-emotion": "^9.2.12",
+    "react-helmet": "^5.2.0",
+    "styled-components": "^3.4.10",
+    "styled-system": "^3.1.11",
+    "system-components": "^3.0.1"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write '**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-plugin-emotion": "^9.2.11",
+    "prettier": "^1.14.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  }
+}
