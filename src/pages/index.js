@@ -57,7 +57,7 @@ const IndexPage = ({ data }) => (
           <Img sizes={node.images[0].sizes} />
           <Details>
             <Title>{node.name}</Title>
-            <Price>$15</Price>
+            <Price>${node.price}</Price>
           </Details>
         </Artwork>
       ))}
@@ -76,6 +76,7 @@ export const pageQuery = graphql`
           name
           sku
           description
+          price
           images {
             url
             sizes(maxWidth: 500, maxHeight: 500, imgixParams: { bg: "f3fbf6", fm: "jpg", fit: "fill" }) {

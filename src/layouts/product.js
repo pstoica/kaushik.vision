@@ -76,7 +76,7 @@ const WorkPage = ({ data: { product } }) => (
           }}
         />
         <Purchase>
-          <Price>${product.price.toFixed(2)}</Price>
+          <Price>${product.price}</Price>
           <Button>Add to cart</Button>
         </Purchase>
       </Info>
