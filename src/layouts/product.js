@@ -25,14 +25,19 @@ const Container = styled('div')`
   justify-content: flex-start;
 `
 
-const Image = styled('div')`
-  width: 50%;
-`
+const Image = styled('div')(
+  theme.mq({
+    width: ['100%', '50%'],
+    padding: `0 0 ${theme.scale[4]}`,
+  })
+)
 
-const Info = styled('div')`
-  padding: 0 ${theme.scale[3]};
-  width: 50%;
-`
+const Info = styled('div')(
+  theme.mq({
+    padding: ['0', `0 ${theme.scale[3]}`],
+    width: ['100%', '50%'],
+  })
+)
 
 const Purchase = styled('div')`
   padding: ${theme.scale[3]} 0;
