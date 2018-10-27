@@ -40,7 +40,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "deploy": "surge ./out kaushik.vision && surge ./out ruddy-writer.surge.sh",
+    "deploy": "surge ./public kaushik.vision && surge ./public ruddy-writer.surge.sh",
     "format": "prettier --write '**/*.js'",
     "test": "true"
   },
