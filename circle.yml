@@ -1,0 +1,10 @@
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run build
+      - npm run deploy
+
+notify:
+  webhooks:
+    - url: https://webhooks.datocms.com/4a9d20e242c47efa7124/deploy-results

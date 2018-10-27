@@ -38,8 +38,9 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
     "develop": "gatsby develop",
+    "build": "gatsby build",
+    "deploy": "surge ./out kaushik.vision && surge ./out ruddy-writer.surge.sh",
     "format": "prettier --write '**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
