@@ -4,7 +4,7 @@ import Img from 'gatsby-image'
 
 import styled from 'react-emotion'
 
-import Layout, { theme } from '../components/layout'
+import Layout, { theme } from '../components/Layout'
 
 const Container = styled('div')`
   display: flex;
@@ -80,7 +80,7 @@ export const pageQuery = graphql`
           images {
             url
             sizes(maxWidth: 500, maxHeight: 500, imgixParams: { bg: "f3fbf6", fm: "jpg", fit: "fill" }) {
-              ...GatsbyDatoCmsSizes
+              ...GatsbyDatoCmsSizes_noBase64
             }
           }
         }

@@ -2,8 +2,9 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'react-emotion'
+import { connect } from 'react-redux'
 
-import Layout, { theme } from '../components/layout'
+import Layout, { theme } from '../components/Layout'
 
 const Button = styled('button')`
   display: inline-block;
@@ -61,33 +62,43 @@ const Price = styled('h3')`
 
 const Description = styled('div')``
 
-const WorkPage = ({ data: { product } }) => (
-  <Layout>
-    <Container>
-      <Image>
-        <Img sizes={product.images[0].sizes} />
-      </Image>
-      <Info>
-        <Title>{product.name}</Title>
-        <Dimensions>{product.dimensions}</Dimensions>
-        <Description
-          dangerouslySetInnerHTML={{
-            __html: product.descriptionNode.childMarkdownRemark.html,
-          }}
-        />
-        <Purchase>
-          <Price>${product.price}</Price>
-          <Button>Add to cart</Button>
-        </Purchase>
-      </Info>
-    </Container>
-  </Layout>
-)
+const WorkPage = ({ data: { product }, store, addItem }) => {
+  return (
+    <Layout>
+      <Container>
+        <Image>
+          <Img sizes={product.images[0].sizes} />
+        </Image>
+        <Info>
+          <Title>{product.name}</Title>
+          <Dimensions>{product.dimensions}</Dimensions>
+          <Description
+            dangerouslySetInnerHTML={{
+              __html: product.descriptionNode.childMarkdownRemark.html,
+            }}
+          />
+          <Purchase>
+            <Price>${product.price}</Price>
+            <Button onClick={() => addItem(product.sku)}>Add to cart</Button>
+          </Purchase>
+          {JSON.stringify(store)}
+        </Info>
+      </Container>
+    </Layout>
+  )
+}
 
-export default WorkPage
+export default connect(
+  state => ({
+    store: state,
+  }),
+  dispatch => ({
+    addItem: sku => dispatch({ type: 'ADD_ITEM', sku }),
+  })
+)(WorkPage)
 
 export const pageQuery = graphql`
-  query Workpage($sku: String!) {
+  query WorkPage($sku: String!) {
     # Select the post which equals this id.
     product: datoCmsProduct(sku: { eq: $sku }) {
       name
@@ -106,7 +117,7 @@ export const pageQuery = graphql`
           maxHeight: 600
           imgixParams: { fm: "jpg", auto: "compress" }
         ) {
-          ...GatsbyDatoCmsSizes
+          ...GatsbyDatoCmsSizes_noBase64
         }
       }
     }

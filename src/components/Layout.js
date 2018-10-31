@@ -5,11 +5,11 @@ import { HelmetDatoCms } from 'gatsby-source-datocms'
 
 import { injectGlobal } from 'emotion'
 import styled from 'react-emotion'
-import { ThemeProvider } from 'emotion-theming'
 import { normalize, opacify } from 'polished'
 
+import createStore from '../createStore'
 import theme from '../theme'
-import Header from './header'
+import Header from './Header'
 
 injectGlobal`
   ${normalize()}
@@ -60,10 +60,20 @@ const Layout = ({ children, data }) => (
             ...GatsbyDatoCmsFaviconMetaTags
           }
         }
+
+        allDatoCmsProduct {
+          edges {
+            node {
+              name
+              sku
+              price
+            }
+          }
+        }
       }
     `}
-    render={({ datoCmsSite: site }) => (
-      <ThemeProvider theme={theme}>
+    render={({ datoCmsSite: site, allDatoCmsProduct: products }) => {
+      return (
         <>
           <HelmetDatoCms
             title={site.globalSeo.fallbackSeo.title}
@@ -80,8 +90,8 @@ const Layout = ({ children, data }) => (
 
           <Container>{children}</Container>
         </>
-      </ThemeProvider>
-    )}
+      )
+    }}
   />
 )
 
