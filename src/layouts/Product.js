@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'react-emotion'
@@ -26,12 +26,81 @@ const Container = styled('div')`
   justify-content: flex-start;
 `
 
-const Image = styled('div')(
+const ImageContainer = styled('div')(
   theme.mq({
     width: ['100%', '50%'],
     padding: `0 0 ${theme.scale[4]}`,
   })
 )
+
+const Thumbnails = styled('div')`
+  display: flex;
+  flex-wrap: wrap;
+  margin: ${theme.scale[1]} -${theme.scale[1]} 0;
+
+  button {
+    ${theme.mq({
+      width: ['25%', '33.33%', '25%'].map(x => `calc(${x} - 8px)`),
+    })};
+    appearance: none;
+    background: transparent;
+    outline: 0;
+    border: none;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    margin: ${theme.scale[1]};
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.15s ease-in;
+
+    &:hover,
+    &:focus {
+      opacity: 0.6;
+    }
+
+    &.active {
+      opacity: 1;
+    }
+  }
+`
+
+const ImageSection = ({ images }) => {
+  const [activeImage, setActiveImage] = useState(0)
+
+  const HiddenImages = styled('div')`
+    width: 0;
+    height: 0;
+  `
+
+  return (
+    <ImageContainer>
+      <a
+        href={images[activeImage].url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Img sizes={images[activeImage].sizes} />
+      </a>
+      <Thumbnails>
+        {images.map((x, i) => (
+          <button
+            key={i}
+            onClick={() => setActiveImage(i)}
+            className={i === activeImage ? 'active' : null}
+          >
+            <Img fluid={x.thumbnailSizes} />
+          </button>
+        ))}
+      </Thumbnails>
+      <HiddenImages>
+        {images.map((x, i) => (
+          <Img key={i} sizes={x.sizes} />
+        ))}
+      </HiddenImages>
+    </ImageContainer>
+  )
+}
 
 const Info = styled('div')(
   theme.mq({
@@ -66,9 +135,7 @@ const WorkPage = ({ data: { product }, store, addItem }) => {
   return (
     <Layout>
       <Container>
-        <Image>
-          <Img sizes={product.images[0].sizes} />
-        </Image>
+        <ImageSection images={product.images} />
         <Info>
           <Title>{product.name}</Title>
           <Dimensions>{product.dimensions}</Dimensions>
@@ -81,7 +148,6 @@ const WorkPage = ({ data: { product }, store, addItem }) => {
             <Price>${product.price}</Price>
             <Button onClick={() => addItem(product.sku)}>Add to cart</Button>
           </Purchase>
-          {JSON.stringify(store)}
         </Info>
       </Container>
     </Layout>
@@ -118,6 +184,13 @@ export const pageQuery = graphql`
           imgixParams: { fm: "jpg", auto: "compress" }
         ) {
           ...GatsbyDatoCmsSizes_noBase64
+        }
+        thumbnailSizes: fluid(
+          maxWidth: 120
+          maxHeight: 120
+          imgixParams: { fm: "jpg", auto: "compress" }
+        ) {
+          ...GatsbyDatoCmsFluid_noBase64
         }
       }
     }
