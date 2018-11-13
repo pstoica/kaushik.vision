@@ -5,26 +5,7 @@ import { useStore, useAction } from 'easy-peasy'
 import styled from 'react-emotion'
 
 import Layout, { theme } from '../components/Layout'
-
-const Button = styled('button')`
-  display: inline-block;
-  border: 1px solid ${theme.colors.primary};
-  padding: ${theme.scale[2]};
-  background: transparent;
-  color: ${theme.colors.primary};
-  border-radius: 5px;
-  text-transform: lowercase;
-  font-family: ${theme.fonts.primary};
-  font-size: ${theme.fontSize[4]};
-  cursor: pointer;
-
-  &:disabled {
-    color: ${theme.colors.gray};
-    border-color: ${theme.colors.gray};
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`
+import Button from '../components/Button'
 
 const Container = styled('div')`
   display: flex;
@@ -141,13 +122,16 @@ const Description = styled('div')``
 
 const WorkPage = ({ data: { product } }) => {
   const itemsInCart = useStore(store => store.cart.items)
-  const actions = useAction(dispatch => ({
+  const inventory = useStore(store => store.inventory)
+  const { addItem, removeItem } = useAction(dispatch => ({
     addItem: dispatch.cart.add,
     removeItem: dispatch.cart.remove,
   }))
 
   const isRemoving = itemsInCart.includes(product.id)
-  const buttonAction = actions[isRemoving ? 'removeItem' : 'addItem']
+  const buttonAction = isRemoving ? removeItem : addItem
+
+  const isSoldOut = inventory[product.id] === 0
 
   return (
     <Layout>
@@ -163,9 +147,16 @@ const WorkPage = ({ data: { product } }) => {
           <Dimensions>{product.dimensions}</Dimensions>
           <Purchase>
             <Price>${product.price}</Price>
-            <Button onClick={() => buttonAction(product.id)}>
-              {isRemoving ? 'Remove from' : 'Add to'} cart
-            </Button>
+            {!!inventory[product.id] && (
+              <Button
+                onClick={() => buttonAction(product.id)}
+                disabled={isSoldOut}
+              >
+                {isSoldOut
+                  ? 'Sold out'
+                  : `${isRemoving ? 'Remove from' : 'Add to'} cart`}
+              </Button>
+            )}
           </Purchase>
         </Info>
       </Container>
@@ -179,6 +170,7 @@ export const pageQuery = graphql`
   query WorkPage($sku: String!) {
     # Select the post which equals this id.
     product: datoCmsProduct(sku: { eq: $sku }) {
+      id: originalId
       name
       sku
       price

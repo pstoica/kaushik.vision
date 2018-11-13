@@ -1,6 +1,10 @@
 import { createStore } from 'easy-peasy'
 import { save, load } from 'redux-localstorage-simple'
 
+import lib from './stdlib'
+
+const h2o = lib.sunupnyc.h2o['@dev']
+
 const store = createStore(
   {
     cart: {
@@ -9,8 +13,16 @@ const store = createStore(
         state.items.push(id)
       },
       remove: (state, id) => {
-        state.items.splice(state.items.findIndex(x => x === id), 1)
+        state.items = state.items.filter(x => x !== id)
       },
+    },
+    inventory: {},
+    setInventory(state, inventory) {
+      Object.assign(state.inventory, inventory)
+
+      state.cart.items = state.cart.items.filter((id, i) => {
+        return state.inventory[id] && state.inventory[id] > 0
+      })
     },
   },
   {
@@ -19,5 +31,9 @@ const store = createStore(
     initialState: load(),
   }
 )
+
+h2o.inventory().then(result => {
+  store.dispatch.setInventory(result)
+})
 
 export default store
