@@ -1,4 +1,5 @@
 import { createStore } from 'easy-peasy'
+import { save, load } from 'redux-localstorage-simple'
 
 const store = createStore(
   {
@@ -14,6 +15,8 @@ const store = createStore(
   },
   {
     devTools: true,
+    middleware: [save()],
+    initialState: load(),
   }
 )
 
