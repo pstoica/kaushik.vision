@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
@@ -7,13 +7,14 @@ import styled from 'react-emotion'
 
 import Button from '../components/Button'
 import theme from '../theme'
+import lib from '../stdlib'
 
 const Container = styled('div')`
   max-width: 600px;
   margin: 0 auto;
 `
 
-const EmptyMessage = styled('div')`
+const Message = styled('div')`
   font-size: ${theme.fontSize[5]};
   max-width: 600px;
   margin: ${theme.scale[4]} auto 0;
@@ -68,19 +69,43 @@ const Summary = styled('div')`
 
 const Checkout = styled('div')`
   text-align: center;
-  margin-top: ${theme.scale[4]};
+  margin: ${theme.scale[4]} 0;
+`
+
+const Error = styled('div')`
+  text-align: center;
+  color: ${theme.colors.gray};
 `
 
 const CartPage = ({ data: { allDatoCmsProduct } }) => {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
   const idToItem = {}
   allDatoCmsProduct.edges.forEach(({ node }) => {
     idToItem[node.id] = node
   })
   const removeItem = useAction(dispatch => dispatch.cart.remove)
 
-  const itemsInCart = useStore(store => store.cart.items).map(x => idToItem[x])
+  const items = useStore(store => store.cart.items)
+  const itemsInCart = items.map(x => idToItem[x])
 
   const total = itemsInCart.reduce((sum, x) => sum + x.price, 0)
+
+  const onCheckout = () => {
+    setLoading(true)
+    setError(null)
+
+    lib.sunupnyc.h2o['@dev']
+      .checkout(items)
+      .then(result => {
+        window.location = result.checkout_page_url
+      })
+      .catch(err => {
+        setLoading(false)
+        setError('something went wrong when placing your order')
+      })
+  }
 
   if (itemsInCart.length > 0) {
     return (
@@ -105,15 +130,19 @@ const CartPage = ({ data: { allDatoCmsProduct } }) => {
           <Summary>${total.toFixed(2).replace('.00', '')}</Summary>
 
           <Checkout>
-            <Button>continue to checkout</Button>
+            <Button disabled={loading} onClick={onCheckout}>
+              {loading ? 'loading...' : 'continue to checkout'}
+            </Button>
           </Checkout>
+
+          <Error>{error}</Error>
         </Container>
       </Layout>
     )
   } else {
     return (
       <Layout>
-        <EmptyMessage>your cart is empty</EmptyMessage>
+        <Message>your cart is empty</Message>
       </Layout>
     )
   }

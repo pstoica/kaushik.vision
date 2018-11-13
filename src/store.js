@@ -15,6 +15,9 @@ const store = createStore(
       remove: (state, id) => {
         state.items = state.items.filter(x => x !== id)
       },
+      clear: state => {
+        state.items = []
+      },
     },
     inventory: {},
     setInventory(state, inventory) {
