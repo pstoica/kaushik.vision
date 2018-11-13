@@ -1,3 +1,5 @@
+const windowGlobal = typeof window !== 'undefined' && window
+
 // prettier-ignore
 /* eslint-disable */
 export default (function (window) {
@@ -332,4 +334,4 @@ export default (function (window) {
 
   return LibGen();
 
-})(window);
+})(windowGlobal);
