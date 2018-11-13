@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import { useStore, useAction } from 'easy-peasy'
 import styled from 'react-emotion'
-import { connect } from 'react-redux'
 
 import Layout, { theme } from '../components/Layout'
 
@@ -17,6 +17,13 @@ const Button = styled('button')`
   font-family: ${theme.fonts.primary};
   font-size: ${theme.fontSize[4]};
   cursor: pointer;
+
+  &:disabled {
+    color: ${theme.colors.gray};
+    border-color: ${theme.colors.gray};
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `
 
 const Container = styled('div')`
@@ -132,7 +139,15 @@ const Price = styled('h3')`
 
 const Description = styled('div')``
 
-const WorkPage = ({ data: { product }, store, addItem }) => {
+const WorkPage = ({ data: { product } }) => {
+  const itemsInCart = useStore(store => store.cart.items)
+  const { addItem, removeItem } = useAction(dispatch => ({
+    addItem: dispatch.cart.add,
+    removeItem: dispatch.cart.remove,
+  }))
+
+  const isRemoving = itemsInCart.includes(product.sku)
+
   return (
     <Layout>
       <Container>
@@ -147,7 +162,13 @@ const WorkPage = ({ data: { product }, store, addItem }) => {
           <Dimensions>{product.dimensions}</Dimensions>
           <Purchase>
             <Price>${product.price}</Price>
-            <Button onClick={() => addItem(product.sku)}>Add to cart</Button>
+            <Button
+              onClick={() =>
+                isRemoving ? removeItem(product.sku) : addItem(product.sku)
+              }
+            >
+              {isRemoving ? 'Remove from' : 'Add to'} cart
+            </Button>
           </Purchase>
         </Info>
       </Container>
@@ -155,14 +176,7 @@ const WorkPage = ({ data: { product }, store, addItem }) => {
   )
 }
 
-export default connect(
-  state => ({
-    store: state,
-  }),
-  dispatch => ({
-    addItem: sku => dispatch({ type: 'ADD_ITEM', sku }),
-  })
-)(WorkPage)
+export default WorkPage
 
 export const pageQuery = graphql`
   query WorkPage($sku: String!) {

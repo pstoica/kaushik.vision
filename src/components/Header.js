@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { useStore } from 'easy-peasy'
 import styled from 'react-emotion'
 
 import theme from '../theme'
@@ -37,13 +38,19 @@ const CartLink = styled(Link)`
   font-size: ${theme.fontSize[3]};
 `
 
-const Header = ({ siteTitle }) => (
-  <Container>
-    <Content>
-      <HomeLink to="/">vsk</HomeLink>
-      <CartLink to="/cart">cart (0)</CartLink>
-    </Content>
-  </Container>
-)
+const Header = ({ siteTitle }) => {
+  const itemsInCart = useStore(store => store.cart.items.length)
+
+  return (
+    <Container>
+      <Content>
+        <HomeLink to="/">vsk</HomeLink>
+        {itemsInCart > 0 && (
+          <CartLink to="/cart">cart ({itemsInCart})</CartLink>
+        )}
+      </Content>
+    </Container>
+  )
+}
 
 export default Header

@@ -7,7 +7,6 @@ import { injectGlobal } from 'emotion'
 import styled from 'react-emotion'
 import { normalize, opacify } from 'polished'
 
-import createStore from '../createStore'
 import theme from '../theme'
 import Header from './Header'
 

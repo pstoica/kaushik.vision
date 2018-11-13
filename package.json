@@ -5,6 +5,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "dotenv-extended": "^2.0.2",
+    "easy-peasy": "^1.6.0",
     "emotion": "^9.2.12",
     "emotion-server": "^9.2.12",
     "emotion-theming": "^9.2.9",

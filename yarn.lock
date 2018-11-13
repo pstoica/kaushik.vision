@@ -3879,6 +3879,16 @@ each-async@^1.0.0, each-async@^1.1.1:
     onetime "^1.0.0"
     set-immediate-shim "^1.0.0"
 
+easy-peasy@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/easy-peasy/-/easy-peasy-1.6.0.tgz#309a4819e781e67fb8bc8f8274ecaf78dcd82059"
+  dependencies:
+    immer "^1.7.4"
+    memoize-one "^4.0.2"
+    redux "^4.0.1"
+    redux-thunk "^2.3.0"
+    shallowequal "^1.1.0"
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -6209,6 +6219,10 @@ imgix-url-params@7.4.0:
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/imgix-url-params/-/imgix-url-params-7.4.0.tgz#bc5ade015654997d6766ee9c72a63b7a5456f6bf"
 
+immer@^1.7.4:
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-1.7.4.tgz#b9a833a61cbeee477a3694870b172c590837a963"
+
 immutable@~3.7.6:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
@@ -7545,6 +7559,10 @@ mem@^4.0.0:
     map-age-cleaner "^0.1.1"
     mimic-fn "^1.0.0"
     p-is-promise "^1.1.0"
+
+memoize-one@^4.0.2:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-4.0.3.tgz#cdfdd942853f1a1b4c71c5336b8c49da0bf0273c"
 
 memoizee@0.3.x:
   version "0.3.10"
@@ -9600,6 +9618,10 @@ redux-react-hook@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/redux-react-hook/-/redux-react-hook-2.0.0.tgz#9723ddefb9ad2e07fe9565fa6325584fd290555e"
 
+redux-thunk@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+
 redux@^3.6.0:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
@@ -10232,7 +10254,7 @@ shallow-compare@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/shallow-compare/-/shallow-compare-1.2.2.tgz#fa4794627bf455a47c4f56881d8a6132d581ffdb"
 
-shallowequal@^1.0.1, shallowequal@^1.0.2:
+shallowequal@^1.0.1, shallowequal@^1.0.2, shallowequal@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
 

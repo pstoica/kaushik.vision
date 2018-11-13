@@ -74,7 +74,7 @@ export const pageQuery = graphql`
           price
           images {
             url
-            sizes(maxWidth: 500, maxHeight: 500, imgixParams: { bg: "f3fbf6", fm: "jpg", fit: "fill" }) {
+            sizes(maxWidth: 500, maxHeight: 500, imgixParams: { bg: "f3fbf6", fm: "jpg", fit: "crop" }) {
               ...GatsbyDatoCmsSizes_noBase64
             }
           }
