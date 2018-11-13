@@ -16,25 +16,32 @@ const Container = styled('div')`
 const Content = styled('div')`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 100%;
   max-width: 960px;
   padding: 0 12px;
   margin: 0 auto;
   text-align: center;
   text-transform: lowercase;
-  font-size: 16px;
+  font-size: ${theme.fontSize[4]};
 
   background: ${theme.colors.secondary};
+`
 
-  a {
-    color: ${theme.colors.primary};
-  }
+const HomeLink = styled(Link)`
+  color: ${theme.colors.primary};
+`
+
+const CartLink = styled(Link)`
+  color: ${theme.colors.black};
+  font-size: ${theme.fontSize[3]};
 `
 
 const Header = ({ siteTitle }) => (
   <Container>
     <Content>
-      <Link to="/">vsk</Link>
+      <HomeLink to="/">vsk</HomeLink>
+      <CartLink to="/cart">cart (0)</CartLink>
     </Content>
   </Container>
 )

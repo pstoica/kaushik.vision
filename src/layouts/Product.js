@@ -122,6 +122,7 @@ const Dimensions = styled('div')`
   font-size: ${theme.fontSize[3]};
   color: ${theme.colors.gray};
   font-weight: lighter;
+  margin: 1em 0;
 `
 
 const Price = styled('h3')`
@@ -129,9 +130,7 @@ const Price = styled('h3')`
   padding: ${theme.scale[2]} ${theme.scale[2]} ${theme.scale[2]} 0;
 `
 
-const Description = styled('div')`
-  min-height: 18px;
-`
+const Description = styled('div')``
 
 const WorkPage = ({ data: { product }, store, addItem }) => {
   return (

@@ -18,7 +18,7 @@ exports.createPages = ({ graphql, actions }) => {
       result.data.allDatoCmsProduct.edges.map(({ node }) => {
         createPage({
           path: `products/${node.sku}`,
-          component: path.resolve(`./src/layouts/product.js`),
+          component: path.resolve(`./src/layouts/Product.js`),
           context: node,
         })
       })
