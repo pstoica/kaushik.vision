@@ -1,6 +1,6 @@
 import { setConfig } from 'react-hot-loader'
-import wrapRootElement from './src/wrapRootElement'
+import wrap from './src/wrapRootElement'
 
 setConfig({ pureSFC: true })
 
-export { wrapRootElement }
+export const wrapRootElement = wrap

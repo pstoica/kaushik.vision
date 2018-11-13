@@ -121,8 +121,10 @@ const Price = styled('h3')`
 const Description = styled('div')``
 
 const WorkPage = ({ data: { product } }) => {
-  const itemsInCart = useStore(store => store.cart.items)
-  const inventory = useStore(store => store.inventory)
+  const { itemsInCart, inventory } = useStore(store => ({
+    itemsInCart: store.cart.items,
+    inventory: store.inventory,
+  }))
   const { addItem, removeItem } = useAction(dispatch => ({
     addItem: dispatch.cart.add,
     removeItem: dispatch.cart.remove,

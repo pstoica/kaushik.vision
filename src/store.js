@@ -3,8 +3,6 @@ import { save, load } from 'redux-localstorage-simple'
 
 import lib from './stdlib'
 
-const h2o = lib.sunupnyc.h2o['@dev']
-
 const store = createStore(
   {
     cart: {
@@ -28,15 +26,19 @@ const store = createStore(
       })
     },
   },
-  {
-    devTools: true,
-    middleware: [save()],
-    initialState: load(),
-  }
+  typeof window !== 'undefined'
+    ? {
+        devTools: true,
+        middleware: [save()],
+        initialState: load(),
+      }
+    : {}
 )
 
-h2o.inventory().then(result => {
-  store.dispatch.setInventory(result)
-})
+if (typeof window !== 'undefined') {
+  lib.sunupnyc.h2o['@dev'].inventory().then(result => {
+    store.dispatch.setInventory(result)
+  })
+}
 
 export default store
