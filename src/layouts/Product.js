@@ -141,12 +141,13 @@ const Description = styled('div')``
 
 const WorkPage = ({ data: { product } }) => {
   const itemsInCart = useStore(store => store.cart.items)
-  const { addItem, removeItem } = useAction(dispatch => ({
+  const actions = useAction(dispatch => ({
     addItem: dispatch.cart.add,
     removeItem: dispatch.cart.remove,
   }))
 
-  const isRemoving = itemsInCart.includes(product.sku)
+  const isRemoving = itemsInCart.includes(product.id)
+  const buttonAction = actions[isRemoving ? 'removeItem' : 'addItem']
 
   return (
     <Layout>
@@ -162,11 +163,7 @@ const WorkPage = ({ data: { product } }) => {
           <Dimensions>{product.dimensions}</Dimensions>
           <Purchase>
             <Price>${product.price}</Price>
-            <Button
-              onClick={() =>
-                isRemoving ? removeItem(product.sku) : addItem(product.sku)
-              }
-            >
+            <Button onClick={() => buttonAction(product.id)}>
               {isRemoving ? 'Remove from' : 'Add to'} cart
             </Button>
           </Purchase>
@@ -196,14 +193,14 @@ export const pageQuery = graphql`
         sizes(
           maxWidth: 600
           maxHeight: 600
-          imgixParams: { fm: "jpg", auto: "compress" }
+          imgixParams: { fm: "jpg", auto: "compress", fit: "crop" }
         ) {
           ...GatsbyDatoCmsSizes_noBase64
         }
         thumbnailSizes: fluid(
           maxWidth: 120
           maxHeight: 120
-          imgixParams: { fm: "jpg", auto: "compress" }
+          imgixParams: { fm: "jpg", auto: "compress", fit: "crop" }
         ) {
           ...GatsbyDatoCmsFluid_noBase64
         }

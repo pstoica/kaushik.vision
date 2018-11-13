@@ -5,11 +5,11 @@ const store = createStore(
   {
     cart: {
       items: [],
-      add: (state, sku) => {
-        state.items.push(sku)
+      add: (state, id) => {
+        state.items.push(id)
       },
-      remove: (state, sku) => {
-        state.items.splice(state.items.findIndex(x => x === sku), 1)
+      remove: (state, id) => {
+        state.items.splice(state.items.findIndex(x => x === id), 1)
       },
     },
   },
