@@ -10,10 +10,10 @@ module.exports = {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: [
-          'karla:400,400i,700',
+          // 'karla:400,400i,700',
           'cardo:400,400i,700',
-          'montserrat:400,400i,700',
-          'josefin sans:400,400i,700',
+          // 'montserrat:400,400i,700',
+          // 'josefin sans:400,400i,700',
         ],
       },
     },

@@ -31,10 +31,6 @@ const Details = styled('div')`
   padding: ${theme.scale[1]} 0;
   text-transform: lowercase;
   line-height: 1.3;
-
-  h2 {
-    font-family: ${theme.fonts.primary};
-  }
 `
 
 const Title = styled('h2')`
@@ -46,7 +42,6 @@ const Price = styled('div')`
   font-size: ${theme.fontSize[2]};
   padding-top: ${theme.scale[2]};
   color: ${theme.colors.gray};
-  font-family: ${theme.fonts.primary};
 `
 
 const IndexPage = ({ data }) => (

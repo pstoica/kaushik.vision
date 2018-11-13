@@ -110,7 +110,7 @@ const Info = styled('div')(
 )
 
 const Purchase = styled('div')`
-  padding: ${theme.scale[3]} 0;
+  padding: ${theme.scale[4]} 0 ${theme.scale[2]};
 `
 
 const Title = styled('h2')`
@@ -120,16 +120,18 @@ const Title = styled('h2')`
 
 const Dimensions = styled('div')`
   font-size: ${theme.fontSize[3]};
-  font-family: ${theme.fonts.primary};
+  color: ${theme.colors.gray};
+  font-weight: lighter;
 `
 
 const Price = styled('h3')`
   font-size: ${theme.fontSize[4]};
   padding: ${theme.scale[2]} ${theme.scale[2]} ${theme.scale[2]} 0;
-  font-family: ${theme.fonts.primary};
 `
 
-const Description = styled('div')``
+const Description = styled('div')`
+  min-height: 18px;
+`
 
 const WorkPage = ({ data: { product }, store, addItem }) => {
   return (
@@ -138,12 +140,12 @@ const WorkPage = ({ data: { product }, store, addItem }) => {
         <ImageSection images={product.images} />
         <Info>
           <Title>{product.name}</Title>
-          <Dimensions>{product.dimensions}</Dimensions>
           <Description
             dangerouslySetInnerHTML={{
               __html: product.descriptionNode.childMarkdownRemark.html,
             }}
           />
+          <Dimensions>{product.dimensions}</Dimensions>
           <Purchase>
             <Price>${product.price}</Price>
             <Button onClick={() => addItem(product.sku)}>Add to cart</Button>
