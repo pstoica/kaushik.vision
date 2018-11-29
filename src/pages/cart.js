@@ -12,14 +12,21 @@ import lib from '../stdlib'
 const Container = styled('div')`
   max-width: 600px;
   margin: 0 auto;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  ${theme.mq({
+    justifyContent: ['flex-start', 'center']
+  })};
 `
 
 const Message = styled('div')`
   font-size: ${theme.fontSize[5]};
-  max-width: 600px;
-  margin: ${theme.scale[4]} auto 0;
   text-align: center;
   color: ${theme.colors.gray};
+  ${theme.mq({
+    padding: ['64px 0 0', 0]
+  })};
 `
 
 const Item = styled('div')`
@@ -142,7 +149,9 @@ const CartPage = ({ data: { allDatoCmsProduct } }) => {
   } else {
     return (
       <Layout>
-        <Message>your cart is empty</Message>
+        <Container>
+          <Message>your cart is <br />empty</Message>
+        </Container>
       </Layout>
     )
   }

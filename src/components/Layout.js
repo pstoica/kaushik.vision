@@ -38,7 +38,7 @@ injectGlobal`
 `
 
 const Container = styled('div')`
-  padding: 60px 12px 0;
+  padding: 60px 12px 60px;
   max-width: 960px;
   margin: 0 auto;
 `

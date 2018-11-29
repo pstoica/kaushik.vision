@@ -17,7 +17,7 @@ const Container = styled('div')`
 const ImageContainer = styled('div')(
   theme.mq({
     width: ['100%', '50%'],
-    padding: `0 0 ${theme.scale[4]}`,
+    padding: `0 0 ${theme.scale[3]}`,
   })
 )
 
@@ -25,6 +25,9 @@ const Thumbnails = styled('div')`
   display: flex;
   flex-wrap: wrap;
   margin: ${theme.scale[1]} -${theme.scale[1]} 0;
+  ${theme.mq({
+    justifyContent: ['center', 'flex-start']
+  })};
 
   button {
     ${theme.mq({
@@ -53,13 +56,14 @@ const Thumbnails = styled('div')`
   }
 `
 
-const ImageSection = ({ images }) => {
-  const [activeImage, setActiveImage] = useState(0)
+const HiddenImages = styled('div')`
+  width: 0;
+  height: 0;
+`
 
-  const HiddenImages = styled('div')`
-    width: 0;
-    height: 0;
-  `
+const ImageSection = (props) => {
+  const [activeImage, setActiveImage] = useState(0)
+  const images = props.images.filter(x => !!x);
 
   return (
     <ImageContainer>
@@ -71,7 +75,7 @@ const ImageSection = ({ images }) => {
         <Img sizes={images[activeImage].sizes} />
       </a>
       <Thumbnails>
-        {images.map((x, i) => (
+        {images.length > 1 && images.map((x, i) => (
           <button
             key={i}
             onClick={() => setActiveImage(i)}
@@ -94,12 +98,18 @@ const Info = styled('div')(
   theme.mq({
     padding: ['0', `0 ${theme.scale[3]}`],
     width: ['100%', '50%'],
+    textAlign: ['center', 'left'],
   })
 )
 
-const Purchase = styled('div')`
-  padding: ${theme.scale[4]} 0 ${theme.scale[2]};
-`
+const Purchase = styled('div')(
+  `
+    padding: ${theme.scale[4]} 0 0;
+  `,
+  theme.mq({
+    textAlign: ['center', 'left'],
+  })
+)
 
 const Title = styled('h2')`
   font-size: ${theme.fontSize[5]};
@@ -115,7 +125,7 @@ const Dimensions = styled('div')`
 
 const Price = styled('h3')`
   font-size: ${theme.fontSize[4]};
-  padding: ${theme.scale[2]} ${theme.scale[2]} ${theme.scale[2]} 0;
+  padding: ${theme.scale[2]} ${theme.scale[2]} ${theme.scale[3]} 0;
 `
 
 const Description = styled('div')``
@@ -141,12 +151,15 @@ const WorkPage = ({ data: { product } }) => {
         <ImageSection images={product.images} />
         <Info>
           <Title>{product.name}</Title>
-          <Description
-            dangerouslySetInnerHTML={{
-              __html: product.descriptionNode.childMarkdownRemark.html,
-            }}
-          />
-          <Dimensions>{product.dimensions}</Dimensions>
+          <Description>
+            <p><em>free shipping on all domestic orders</em></p>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: product.descriptionNode.childMarkdownRemark.html,
+              }}
+            />
+          </Description>
+          <Dimensions>{product.dimensions.replace(/ /g, '').replace(/-/g, ' x ')}</Dimensions>
           <Purchase>
             <Price>${product.price}</Price>
             {!!inventory[product.id] && (
