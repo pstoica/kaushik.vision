@@ -12,12 +12,24 @@ const Button = styled('button')`
   font-family: ${theme.fonts.primary};
   font-size: ${theme.fontSize[4]};
   cursor: pointer;
+  outline: 0;
+
+  &:hover, &:focus {
+    box-shadow: 1px 1px 0px ${theme.colors.primary};
+  }
+
+  &:active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+  }
+
 
   &:disabled {
     color: ${theme.colors.gray};
     border-color: ${theme.colors.gray};
     opacity: 0.5;
     cursor: not-allowed;
+    box-shadow: none;
   }
 `
 
