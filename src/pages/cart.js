@@ -103,7 +103,7 @@ const CartPage = ({ data: { allDatoCmsProduct } }) => {
     setLoading(true)
     setError(null)
 
-    lib.sunupnyc.h2o['@dev']
+    lib.sunupnyc.h2o['@0.0.1']
       .checkout(items)
       .then(result => {
         window.location = result.checkout_page_url

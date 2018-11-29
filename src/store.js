@@ -36,7 +36,7 @@ const store = createStore(
 )
 
 if (typeof window !== 'undefined') {
-  lib.sunupnyc.h2o['@dev'].inventory().then(result => {
+  lib.sunupnyc.h2o['@0.0.1'].inventory().then(result => {
     store.dispatch.setInventory(result)
   })
 }
