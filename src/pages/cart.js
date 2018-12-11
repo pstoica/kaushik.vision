@@ -95,7 +95,7 @@ const CartPage = ({ data: { allDatoCmsProduct } }) => {
   const removeItem = useAction(dispatch => dispatch.cart.remove)
 
   const items = useStore(store => store.cart.items)
-  const itemsInCart = items.map(x => idToItem[x])
+  const itemsInCart = items.map(x => idToItem[x]).filter(x => !!x);
 
   const total = itemsInCart.reduce((sum, x) => sum + x.price, 0)
 

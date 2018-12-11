@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
+import { useAction } from 'easy-peasy'
 
 import { injectGlobal } from 'emotion'
 import styled from 'react-emotion'
@@ -37,7 +38,18 @@ injectGlobal`
   }
 `
 
-const Container = styled('div')`
+const Container = styled(({ products, ...props }) => {
+  const setDatoMap = useAction((dispatch) => dispatch.setDatoMap)
+
+  useEffect(
+    () => {
+      setDatoMap(products.edges.map(x => x.node))
+    },
+    []
+  )
+
+  return <div {...props} />
+})`
   padding: 60px 12px 60px;
   max-width: 960px;
   margin: 0 auto;
@@ -63,6 +75,7 @@ const Layout = ({ children, data }) => (
         allDatoCmsProduct {
           edges {
             node {
+              id: originalId
               name
               sku
               price
@@ -87,7 +100,7 @@ const Layout = ({ children, data }) => (
 
           <Header siteTitle={site.globalSeo.siteName} />
 
-          <Container>{children}</Container>
+          <Container products={products}>{children}</Container>
         </>
       )
     }}
