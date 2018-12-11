@@ -3,8 +3,6 @@ import { save, load } from 'redux-localstorage-simple'
 
 import lib from './stdlib'
 
-let hasSynced = false
-
 const store = createStore(
   {
     cart: {
@@ -21,6 +19,7 @@ const store = createStore(
     },
     inventory: {},
     datoMap: {},
+    hasSynced: false,
     setInventory(state, inventory) {
       Object.assign(state.inventory, inventory)
 
@@ -29,19 +28,17 @@ const store = createStore(
       })
     },
     setDatoMap(state, datoArray) {
-      if (hasSynced) {
+      if (state.hasSynced) {
         return
       }
-
-      hasSynced = true
 
       const map = {}
       datoArray.forEach(x => {
         map[x.id] = x
       })
 
+      state.hasSynced = true
       state.datoMap = map
-
       state.cart.items = state.cart.items.filter((id) => {
         return !!state.datoMap[id]
       })
@@ -49,9 +46,9 @@ const store = createStore(
   },
   typeof window !== 'undefined'
     ? {
-        devTools: true,
-        middleware: [save()],
-        initialState: load(),
+        devTools: process.env.NODE_ENV === 'development',
+        middleware: [save({ states: ['cart'] })],
+        initialState: load({ states: ['cart']}),
       }
     : {}
 )

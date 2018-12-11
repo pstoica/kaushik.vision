@@ -87,6 +87,7 @@ const Error = styled('div')`
 const CartPage = ({ data: { allDatoCmsProduct } }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const hasSynced = useStore(store => store.hasSynced)
 
   const idToItem = {}
   allDatoCmsProduct.edges.forEach(({ node }) => {
@@ -96,6 +97,10 @@ const CartPage = ({ data: { allDatoCmsProduct } }) => {
 
   const items = useStore(store => store.cart.items)
   const itemsInCart = items.map(x => idToItem[x]).filter(x => !!x);
+
+  if (!hasSynced) {
+    return <Layout />
+  }
 
   const total = itemsInCart.reduce((sum, x) => sum + x.price, 0)
 
