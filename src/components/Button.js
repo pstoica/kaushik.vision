@@ -3,10 +3,10 @@ import theme from '../theme'
 
 const Button = styled('button')`
   display: inline-block;
-  border: 1px solid ${theme.colors.primary};
+  border: 1px solid ${theme.colors.secondary};
   padding: ${theme.scale[2]};
   background: transparent;
-  color: ${theme.colors.primary};
+  color: ${theme.colors.secondary};
   border-radius: 5px;
   text-transform: lowercase;
   font-family: ${theme.fonts.primary};
@@ -15,7 +15,7 @@ const Button = styled('button')`
   outline: 0;
 
   &:hover, &:focus {
-    box-shadow: 1px 1px 0px ${theme.colors.primary};
+    box-shadow: 1px 1px 0px ${theme.colors.secondary};
   }
 
   &:active {
@@ -25,8 +25,6 @@ const Button = styled('button')`
 
 
   &:disabled {
-    color: ${theme.colors.gray};
-    border-color: ${theme.colors.gray};
     opacity: 0.5;
     cursor: not-allowed;
     box-shadow: none;

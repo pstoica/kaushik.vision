@@ -24,7 +24,7 @@ injectGlobal`
 
   body {
     font-family: ${theme.fonts.primary};
-    background-color: ${theme.colors.secondary};
+    background-color: ${theme.colors.background};
     color: ${theme.colors.black};
   }
 
@@ -34,7 +34,7 @@ injectGlobal`
   }
 
   ::selection {
-    background-color: ${opacify(-0.8, theme.colors.secondary)};
+    background-color: ${opacify(-0.8, theme.colors.primary)};
   }
 `
 

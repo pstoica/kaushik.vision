@@ -1,15 +1,16 @@
 import facepaint from 'facepaint'
-import { lighten } from 'polished'
 
 const breakpoints = ['32em', '48em', '64em']
-
+const secondary = '#ffcc00'
+const background = '#FFFCF1';
+const primary = '#a15aff'
 const theme = {
   colors: {
     black: '#555',
     gray: '#888',
-    white: '#fff',
-    primary: '#F45433',
-    secondary: lighten(0.34, '#6DD493'),
+    background,
+    primary,
+    secondary,
   },
   fonts: {
     primary: '"Cardo", serif',

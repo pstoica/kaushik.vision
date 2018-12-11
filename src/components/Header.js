@@ -26,7 +26,7 @@ const Content = styled('div')`
   text-transform: lowercase;
   font-size: ${theme.fontSize[4]};
 
-  background: ${theme.colors.secondary};
+  background: ${theme.colors.background};
 `
 
 const HomeLink = styled(Link)`
